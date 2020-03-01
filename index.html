@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Human Population Growth Model</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Import Custom Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IM Fell English SC">
+
+    <style>
+        #d6Output1 {
+            border-style: solid;
+            border-radius: 5px;
+            box-shadow: 2px 5px;
+            text-align: center;
+        }
+
+        #startingPopulation {
+            border-style: solid;
+            border-radius: 5px;
+            box-shadow: 2px 5px;
+            text-align: center;
+            font-size: larger;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center mb-5">Human Population Growth Model</h2>
+                <ul class="nav nav-fill">
+                    <a class="nav-item" href="#exercizeOneRoll">Exercize One - Roll a Die</a>
+                    <a class="nav-item" href="#exercizeOneDataTable1">Exercize One - Data Table 1</a>
+                    <a class="nav-item" href="#exercizeTwo">Exercize Two</a>
+                </ul>
+                <hr class="mb-5">
+                <div class="row">
+
+                    <div class="col-md-8 offset-md-2">
+                        <p>
+                            <span>In this exercise, you will use dice to model population growth. Each die will
+                                represent an individual; new individuals will be born, and individuals will also die.
+                                You will track the entire population until the population density (number of
+                                individuals) reaches 100.</span>
+                        </p>
+
+                        <div>
+                            <ul>
+                                <li>1 - 2 = birth</li>
+                                <li>3, 4, 5 = nothing</li>
+                                <li>6 = death</li>
+                            </ul>
+                        </div>
+                        <span class="anchor" id="exercizeOneRoll"></span>
+                        <hr class="mb-5">
+
+                        <!-- form card - Exercize One -->
+                        <div class="card card-outline-secondary">
+                            <div class="card-header">
+                                <h3 class="mb-0">Exercize One - Roll a d6</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="form" role="form" autocomplete="off" id="mainForm">
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <button id="rollD6Btn" class="btn btn-success btn-lg">Roll Die</button>
+                                        </div>
+                                        <div class="col-2">
+                                            <h2 id="d6Output1">0</h2>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        Population Change: <span id="popChange1"></span>
+                                    </div>
+                            </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /form roll die -->
+
+                </div>
+                <div class="col-sm-10 offset-md-2">
+                    <span class="anchor" id="exercizeOneDataTable1"></span>
+                    <hr class="mb-5">
+
+                    <!-- form card run model -->
+                    <div class="card card-outline-secondary">
+                        <div class="card-header">
+                            <h3 class="mb-0">Data Table 1</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form" role="form" autocomplete="off">
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        Initial Population:
+                                    </div>
+                                    <!-- <label class="col col-form-label form-control-label">Initial Population: </label> -->
+                                    <div class="col-3">
+                                        <input id="startingPopulation" class="form-control" type="number" value="4"
+                                            required="">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <button id="runModel1Btn" class="btn btn-success btn-lg">Run Model</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <table class="table" id="table1">
+                                        <thead>
+                                            <tr>
+                                                <th>Generation</th>
+                                                <th>Initial Population Size (N)</th>
+                                                <th>Number of Births (B)</th>
+                                                <th>Number of Deaths (D)</th>
+                                                <th>Final Population Size (N + B - D)</th>
+                                                <th>Change in Population Size (Final - Initial)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="dataTable1Rows">
+                                                <td id="genNum"></td>
+                                                <td id="initPop"></td>
+                                                <td id="numBirth"></td>
+                                                <td id="numDeath"></td>
+                                                <td id="finalPop"></td>
+                                                <td id="popChange"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /form card Exercize 1 -->
+                </div>
+
+            </div>
+            <!--/row-->
+            <br><br><br><br>
+
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+    <hr>
+    <p class="text-center">The End.<br>
+        <!-- <a class="small text-info d-inline-block" href="https://www.codeply.com/bootstrap-4-examples">More Bootstrap 4 Examples</a> -->
+    </p>
+
+    </div>
+    <!--/container-->
+    <script>
+        function rollD6() {
+            let result = Math.floor(Math.random() * 6 + 1);
+            return result;
+        }
+
+        $(document).ready(function () {
+            // validation example for Login form
+            $("#rollD6Btn").click(function (event) {
+                event.preventDefault();
+
+                let result = rollD6()
+                $("#d6Output1").html(result)
+
+                if (result == 1 || result == 2) {
+                    $("#popChange1").html("Birth")
+                } else if (result == 6) {
+                    $("#popChange1").html("Death")
+                } else {
+                    $("#popChange1").html("No Change")
+                }
+
+            });
+
+            $("#runModel1Btn").click(function (event) {
+                event.preventDefault();
+
+                var startingPop = parseInt($("#startingPopulation").val())
+
+                if (startingPop < 1) {
+
+                } else {
+                    runTest1()
+                }
+            })
+
+        })
+
+        function runTest1() {
+            // empty the table
+            //$("#table1 tbody").empty()    // does not work
+            //$("#table1 tbody > tr").remove()    // this doesn't work either
+            $("#table1 td").parent().remove()
+
+            let genNum = 0
+            let finalPopulation = 0
+
+            let numBirths = 0
+            let numDeaths = 0
+            let popChange = 0
+
+            let dataTable1RowString = ""
+
+            var startingPop = parseInt($("#startingPopulation").val())
+            initialPop = startingPop
+
+            while(finalPopulation < 101) {
+                genNum++
+                console.log("gen: " + genNum)
+
+                numBirths = 0
+                numDeaths = 0
+                popChange = 0
+
+                //initialPop = finalPopulation
+                for (i=0; i<initialPop; i++) {
+                    let dieRoll = rollD6()
+                    console.log("roll: [" + i + "] " + dieRoll)
+                    if (dieRoll == 1 || dieRoll == 2) numBirths++
+                    
+                    if (dieRoll == 6) numDeaths++
+                }
+                finalPopulation = initialPop + numBirths - numDeaths
+                popChange = finalPopulation - initialPop
+
+                console.log("Num births: " + numBirths)
+                console.log("Num deaths: " + numDeaths)
+
+                console.log("final pop: " + finalPopulation)
+                console.log("pop change: " + popChange)
+
+                // write the table row
+                dataTable1RowString = `<tr>
+                    <td>${genNum}</td>
+                    <td>${initialPop}</td>
+                    <td>${numBirths}</td>
+                    <td>${numDeaths}</td>
+                    <td>${finalPopulation}</td>
+                    <td>${popChange}</td>
+                    </tr>
+                `
+                $("#table1 tr:last").after(dataTable1RowString)
+
+                initialPop = finalPopulation
+
+                if (finalPopulation < 1) finalPopulation = 101
+
+                //finalPopulation = 101
+
+                // check for infinite loop
+                if (genNum > 300) finalPopulation = 101
+            }
+
+        }
+    </script>
+</body>
+
+</html>
